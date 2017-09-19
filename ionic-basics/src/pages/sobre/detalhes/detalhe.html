@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Detalhes
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <p>Detalhes sobre {{titulo}}</p>
+  <hr>
+  <p>Parametros  {{parametros|json}}</p>
+  <hr>
+  <button ion-button (click)="volta()">Feito</button>
+  <hr>
+  <button ion-button (click)="voltaTudo()">Volta Tudo</button>
+
+
+
+</ion-content>
