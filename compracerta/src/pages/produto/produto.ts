@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { ListaProvider } from '../../providers/lista/lista';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 /**
  * Generated class for the ProdutoPage page.
  *
@@ -15,11 +16,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProdutoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public lp:ListaProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProdutoPage');
+  salvar(r){
+    console.log(r);
+    let novoItem={comprado:this.lp.selecionado.comprado,nome:r.value.nome,quantidade:r.value.quantidade};
+    if (this.lp.alterando){
+       novoItem['$key']=this.lp.selecionado['$key'];
+       this.lp.alterando=false;
+       this.lp.update(novoItem);
+    }
+    else{
+      this.lp.add(novoItem);
+    }
+    this.navCtrl.parent.select(0); 
+  }
+
+  ionViewDidLeave(){
+    this.lp.alterando=false;
+    this.lp.selecionado={quantidade:0,nome:"",comprado:false};
   }
 
 }

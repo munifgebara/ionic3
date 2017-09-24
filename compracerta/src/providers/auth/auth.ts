@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from "rxjs/Observable";
+import {ListaProvider} from "../../providers/lista/lista";
 import * as firebase from 'firebase/app';
  
 @Injectable()
@@ -9,7 +10,7 @@ export class AuthProvider {
    user: Observable<firebase.User>;
 
   
-  constructor(private af: AngularFireAuth) {
+  constructor(private af: AngularFireAuth,public lp:ListaProvider) {
     this.user = af.authState;
   }
 
@@ -18,7 +19,6 @@ export class AuthProvider {
     return Observable.create(observer => {
       this.af.auth.signInWithEmailAndPassword(credentials.email, credentials.password
       ).then((authData) => {
-        //console.log(authData);
         observer.next(authData);
       }).catch((error) => {
         observer.error(error);
@@ -51,6 +51,7 @@ export class AuthProvider {
   }
  
   logout() {
+    this.lp.desconecta();
     this.af.auth.signOut();
   }
  

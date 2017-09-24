@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthProvider } from '../../providers/auth/auth'; //added AuthProvider
+import { HomePage } from "../home/home";
 
 /**
  * Generated class for the ConfigPage page.
@@ -15,11 +17,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ConfigPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth:AuthProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConfigPage');
+  }
+
+  logout(): void {
+    this.auth.logout();
   }
 
 }

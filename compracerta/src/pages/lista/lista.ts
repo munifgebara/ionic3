@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Tabs } from 'ionic-angular';
 import { ListaProvider } from '../../providers/lista/lista';
 
 
@@ -20,6 +20,7 @@ export class ListaPage {
   lista;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public lp: ListaProvider) {
+    lp.conecta();
   }
 
   ngOnInit() {
@@ -32,13 +33,14 @@ export class ListaPage {
   }
 
   itemSelected(item){
-    console.log(item);
-    //this.navCtrl
+    this.lp.alterando=true;
+    this.lp.selecionado=JSON.parse(JSON.stringify(item));
+    this.lp.selecionado['$key']=item.$key;
+    this.navCtrl.parent.select(1); 
   }
   itemUpdated(item){
-    console.log(item);
+    
     this.lp.update(item);
-    //this.navCtrl
   }
 
   novo() {

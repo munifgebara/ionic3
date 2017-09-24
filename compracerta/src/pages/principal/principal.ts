@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
+import { ListaProvider } from '../../providers/lista/lista';
 
 /**
  * Generated class for the PrincipalPage tabs.
@@ -20,6 +21,15 @@ export class PrincipalPage {
   configRoot = 'ConfigPage'
 
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController,public lp:ListaProvider) {}
+
+  mudouTab(event){
+    console.log(event.ionSelect);
+    console.log('Mudou para tab ',event.root);
+  }
+
+  novoProduto(){
+    console.log('Novo Produto');
+  }
 
 }

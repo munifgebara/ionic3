@@ -30,9 +30,16 @@ export class HomePage {
     this.password = this.loginForm.controls['password'];
   }
   onLoginStateChange(u) {
-    console.log('onLoginStateChange',u);
+    let last=this.navCtrl.last();
+    let active =(last===undefined)?true:this.navCtrl.last().instance instanceof HomePage;
+    console.log('onLoginStateChange',active);
     if (u){
        this.navCtrl.push(PrincipalPage);    
+    }
+    else if(!active&&!u) {
+      console.log("Voltando para a Principal");
+       this.navCtrl.popToRoot().catch(reason=>console.log("Pop to Root"+reason));;
+       
     }
   }
 

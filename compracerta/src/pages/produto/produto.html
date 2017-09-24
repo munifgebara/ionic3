@@ -14,5 +14,25 @@
 
 
 <ion-content padding>
+  <form #f="ngForm" (ngSubmit)="salvar(f)" novalidate>
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>Nome</ion-label>
+        <ion-input name="nome" type="text" [ngModel]="lp.selecionado?.nome"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Quantidade</ion-label>
+        <ion-input name="quantidade" type="number" [ngModel]="lp.selecionado?.quantidade"></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-row>
+      <button type="submit" ion-button block>Salvar</button>
+    </ion-row>
+  </form>
+
 
 </ion-content>
