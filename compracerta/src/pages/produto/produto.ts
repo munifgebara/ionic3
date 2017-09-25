@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ListaProvider } from '../../providers/lista/lista';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 /**
  * Generated class for the ProdutoPage page.
  *
@@ -33,7 +32,11 @@ export class ProdutoPage {
     this.navCtrl.parent.select(0); 
   }
 
-  ionViewDidLeave(){
+  delete(r){
+    this.lp.delete(this.lp.selecionado['$key']);
+    this.navCtrl.parent.select(0);
+  }
+  ionViewWillLeave(){
     this.lp.alterando=false;
     this.lp.selecionado={quantidade:0,nome:"",comprado:false};
   }

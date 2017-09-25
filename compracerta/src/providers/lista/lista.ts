@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
-import * as firebase from 'firebase/app';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 
 @Injectable()
 export class ListaProvider {
 
-  colecao='lista_de_compras';
+  supercolecao='lista_de_compras';
+  colecao='default';
 
   selecionado={quantidade:0,nome:"",comprado:false};
    
@@ -21,7 +21,7 @@ export class ListaProvider {
   conecta(){
     console.log('Conectando');
     console.log("items antes de conectar",this.items);
-    this.items = this.db.list('/' + this.colecao);
+    this.items = this.db.list('/'+this.supercolecao+'/' + this.colecao);
     //console.log("items depois de conectar",this.items);
   }
 

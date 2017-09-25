@@ -5,6 +5,7 @@ import { AuthProvider } from '../../providers/auth/auth'; //added AuthProvider
 import { SignupPage } from '../signup/signup' //Added sign up page
 import { ResetPasswordPage } from '../reset-password/reset-password'
 import { PrincipalPage  } from '../principal/principal'
+import { ListaProvider } from "../../providers/lista/lista";
 
 @Component({
   selector: 'page-home',
@@ -20,7 +21,7 @@ export class HomePage {
   principalPage=PrincipalPage;
   logado;
 
-  constructor(public navCtrl: NavController, private fb: FormBuilder, public auth: AuthProvider) { //Added AuthProvider
+  constructor(public navCtrl: NavController, private fb: FormBuilder, public auth: AuthProvider,public lp:ListaProvider) { //Added AuthProvider
     this.loginForm = this.fb.group({
       'email': ['', Validators.compose([Validators.required, Validators.pattern(/[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(1)])]
@@ -34,6 +35,7 @@ export class HomePage {
     let active =(last===undefined)?true:this.navCtrl.last().instance instanceof HomePage;
     console.log('onLoginStateChange',active);
     if (u){
+       this.lp.colecao=u.uid;
        this.navCtrl.push(PrincipalPage);    
     }
     else if(!active&&!u) {

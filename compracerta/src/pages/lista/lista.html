@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Lista</ion-title>
+    <ion-title>Lista de Compras</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -21,7 +21,7 @@
     <button ion-item *ngFor="let item of lista|async" (click)="itemSelected(item)">
           <ion-toggle [(ngModel)]="item.comprado" (ionChange)="itemUpdated(item)" ></ion-toggle>
           <ion-label>
-        {{ item.nome }} 
+          {{ item.nome }} ({{item.quantidade}}) 
           </ion-label>
       </button>
   </ion-list>

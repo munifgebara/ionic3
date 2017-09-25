@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth'; //added AuthProvider
-import { HomePage } from "../home/home";
 
 /**
  * Generated class for the ConfigPage page.

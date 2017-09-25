@@ -7,32 +7,36 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Produto</ion-title>
+    <ion-title>{{lp.alterando?"Alterando":"Incluindo"}} Produto</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <form #f="ngForm" (ngSubmit)="salvar(f)" novalidate>
-    <ion-list>
+  <ion-list>
+    <form #f="ngForm" (ngSubmit)="salvar(f)" novalidate>
+
 
       <ion-item>
         <ion-label floating>Nome</ion-label>
-        <ion-input name="nome" type="text" [ngModel]="lp.selecionado?.nome"></ion-input>
+        <ion-input name="nome" type="text" [ngModel]="lp.selecionado.nome"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Quantidade</ion-label>
-        <ion-input name="quantidade" type="number" [ngModel]="lp.selecionado?.quantidade"></ion-input>
+        <ion-input name="quantidade" type="number" [ngModel]="lp.selecionado.quantidade"></ion-input>
       </ion-item>
 
-    </ion-list>
 
+
+      <ion-row>
+        <button type="submit" ion-button block>Salvar</button>
+      </ion-row>
+    </form>
     <ion-row>
-      <button type="submit" ion-button block>Salvar</button>
+      <button (click)="delete()" ion-button block [disabled]="!lp.alterando">Excluir</button>
     </ion-row>
-  </form>
-
+  </ion-list>
 
 </ion-content>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth'; //added AuthProvider
-import { HomePage } from '../home/home';
+//import { HomePage } from '../home/home';
  
 @Component({
   selector: 'page-signup',
@@ -31,7 +31,7 @@ export class SignupPage {
         this.auth.registerUser(credentials).subscribe(registerData => {
             console.log(registerData);
             alert('User is registered and logged in.');
-            this.navCtrl.setRoot(HomePage);
+            //this.navCtrl.setRoot(HomePage);
         }, registerError => {
           console.log(registerError);
           if (registerError.code === 'auth/weak-password' || registerError.code === 'auth/email-already-in-use')
