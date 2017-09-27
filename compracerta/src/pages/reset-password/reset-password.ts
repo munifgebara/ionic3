@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth'; //added AuthProvider
 import { HomePage } from '../home/home';
- 
+
 @Component({
   selector: 'page-reset-password',
   templateUrl: 'reset-password.html'
@@ -11,28 +11,17 @@ import { HomePage } from '../home/home';
 export class ResetPasswordPage {
   resetPasswordForm: FormGroup;
   email: AbstractControl;
- 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder, private auth: AuthProvider)
-  {
-    this.resetPasswordForm = this.fb.group({  
-          'email': ['', Validators.compose([Validators.required, Validators.pattern(/[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)])]
-      });
-  
-      this.email = this.resetPasswordForm.controls['email'];     
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder, private auth: AuthProvider) {
+    this.resetPasswordForm = this.fb.group({
+      'email': ['', Validators.compose([Validators.required, Validators.pattern(/[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)])]
+    });
+
+    this.email = this.resetPasswordForm.controls['email'];
   }
- 
-  submit(): void { 
-    if(this.resetPasswordForm.valid) {
-        this.auth.resetPassword(this.email.value).subscribe(registerData => {
-            alert('Password recovery link is sent.');
-            this.navCtrl.setRoot(HomePage);
-        }, registerError => {
-          console.log(registerError);
-          if (registerError.code === 'auth/user-not-found')
-          {
-            alert(registerError.message);
-          }
-      });
-    }
+
+  submit(): void {
+    this.auth.resetPassword(this.email.value).then(c => { console.log(c); this.navCtrl.setRoot(HomePage); }).catch(erro => console.log(erro));
   }
+
 }

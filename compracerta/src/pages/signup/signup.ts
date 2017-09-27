@@ -26,20 +26,7 @@ export class SignupPage {
   }
  
   submit(): void { 
-    if(this.signupForm.valid) {
-        var credentials = ({email: this.email.value, password: this.password.value});
-        this.auth.registerUser(credentials).subscribe(registerData => {
-            console.log(registerData);
-            alert('User is registered and logged in.');
-            //this.navCtrl.setRoot(HomePage);
-        }, registerError => {
-          console.log(registerError);
-          if (registerError.code === 'auth/weak-password' || registerError.code === 'auth/email-already-in-use')
-          {
-            alert(registerError.message);
-          }
-          this.error = registerError;
-        });
-    }
+    var credentials = ({email: this.email.value, password: this.password.value});
+    this.auth.registerUser(credentials).then(c=>console.log(c)).catch(erro=>console.log(erro));
   } 
 }

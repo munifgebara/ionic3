@@ -37,7 +37,7 @@ export class ListaProvider {
   getAll() {
     return this.items;
   }
-
+/*
   getOne(id) {
     if (id === 'new') {
       return this.newObject();
@@ -48,7 +48,7 @@ export class ListaProvider {
   newObject() {
     return new Promise(resolve=>{resolve({})});
   }
-
+*/
   update(objeto) {
     console.log(objeto)
     let o=JSON.parse(JSON.stringify(objeto));
@@ -61,10 +61,7 @@ export class ListaProvider {
   }
 
   desconecta(){
-    console.log("items antes de desconectar",this.items);
     this.items.$ref.off();
-    
-    console.log("items depois de desconectar",this.items);
   }
 
 }

@@ -50,17 +50,10 @@ export class HomePage {
   login(): void {
     if (this.loginForm.valid) {
       var credentials = ({ email: this.email.value, password: this.password.value });
-      this.auth.loginWithEmail(credentials).subscribe(data => {
-        console.log(data);
-      }, error => {             //Added next lines for handling unknown users
-        console.log(error);
-        if (error.code == 'auth/user-not-found') {
-          alert('User not found');
-        }
-      });
+      this.auth.loginWithEmail(credentials).then(r=>console.log(r)).catch(erro=>console.log(erro));
     }
   }
-
+  
   logout(): void {
     this.auth.logout();
   }
